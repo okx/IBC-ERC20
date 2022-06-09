@@ -3,14 +3,14 @@
 
 pragma solidity ^0.8.0;
 
-contract MoudleERC20Proxy {
+contract ModuleERC20Proxy {
     address public implementation;
     address public proxyAdmin;
 
     modifier onlyProxyAdmin() {
         require(
             msg.sender == proxyAdmin,
-            "MoudleERC20Proxy: caller is not proxy admin"
+            "ModuleERC20Proxy: caller is not proxy admin"
         );
         _;
     }
@@ -22,7 +22,7 @@ contract MoudleERC20Proxy {
             _functionDelegateCall(
                 _implementation,
                 _data,
-                "MoudleERC20Proxy: delegate call failed"
+                "ModuleERC20Proxy: delegate call failed"
             );
         }
     }
@@ -52,7 +52,7 @@ contract MoudleERC20Proxy {
         _functionDelegateCall(
             implementation,
             data,
-            "MoudleERC20Proxy: delegate call failed"
+            "ModuleERC20Proxy: delegate call failed"
         );
     }
 
@@ -88,7 +88,7 @@ contract MoudleERC20Proxy {
     ) internal returns (bytes memory) {
         require(
             _isContract(target),
-            "MoudleERC20Proxy: delegate call to non-contract"
+            "ModuleERC20Proxy: delegate call to non-contract"
         );
 
         (bool success, bytes memory returndata) = target.delegatecall(data);

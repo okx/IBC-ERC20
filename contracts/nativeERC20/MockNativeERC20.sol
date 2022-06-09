@@ -12,7 +12,7 @@ contract MockNativeERC20 is ERC20, NativeERC20Base {
     function symbol()
         public
         view
-        override(NativeERC20Base, ERC20)
+        override(ERC20, NativeERC20Base)
         returns (string memory)
     {
         return super.symbol();
@@ -20,14 +20,14 @@ contract MockNativeERC20 is ERC20, NativeERC20Base {
 
     function _mint(address account, uint256 amount)
         internal
-        override(NativeERC20Base, ERC20)
+        override(ERC20, NativeERC20Base)
     {
         super._mint(account, amount);
     }
 
     function _burn(address account, uint256 amount)
         internal
-        override(NativeERC20Base, ERC20)
+        override(ERC20, NativeERC20Base)
     {
         super._burn(account, amount);
     }
