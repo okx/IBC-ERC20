@@ -22,7 +22,7 @@ contract ERC20 {
         string memory symbol_,
         uint8 decimals_
     ) internal {
-        require(decimals_ == 0, "ERC20: already initialized;");
+        require(_decimals == 0, "ERC20: already initialized;");
 
         _name = name_;
         _symbol = symbol_;

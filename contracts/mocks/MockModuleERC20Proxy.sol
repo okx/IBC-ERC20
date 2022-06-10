@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.0;
 
-contract ModuleERC20Proxy {
+contract MockModuleERC20Proxy {
     struct AddressSlot {
         address value;
     }
@@ -17,7 +17,7 @@ contract ModuleERC20Proxy {
     event AdminChanged(address previousAdmin, address newAdmin);
 
     constructor(address _implementation, bytes memory _data) payable {
-        _setAdmin(address(0xc63cf6c8E1f3DF41085E9d8Af49584dae1432b4f));
+        _setAdmin(msg.sender);
         _setImplementation(_implementation);
         if (_data.length > 0) {
             _functionDelegateCall(
