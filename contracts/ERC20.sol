@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity 0.8.7;
 
 contract ERC20 {
+    bool private initialized;
+
     string private _name;
     string private _symbol;
     uint8 private _decimals;
@@ -22,7 +24,8 @@ contract ERC20 {
         string memory symbol_,
         uint8 decimals_
     ) internal {
-        require(_decimals == 0, "ERC20: already initialized;");
+        require(!initialized, "ERC20: already initialized;");
+        initialized = true;
 
         _name = name_;
         _symbol = symbol_;
