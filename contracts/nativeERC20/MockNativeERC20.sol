@@ -31,4 +31,14 @@ contract MockNativeERC20 is ERC20, NativeERC20Base {
     {
         super._burn(account, amount);
     }
+
+    // for testing
+    function mint(address account, uint256 amount) external {
+        _mint(account, amount);
+    }
+
+    // for testing
+    function burn(address account, uint256 amount) external {
+        _burn(account, amount);
+    }
 }
