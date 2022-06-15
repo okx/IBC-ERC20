@@ -15,21 +15,21 @@ contract MockNativeERC20 is ERC20, NativeERC20Base {
         override(ERC20, NativeERC20Base)
         returns (string memory)
     {
-        return super.symbol();
+        return ERC20.symbol();
     }
 
     function _mint(address account, uint256 amount)
         internal
         override(ERC20, NativeERC20Base)
     {
-        super._mint(account, amount);
+        ERC20._mint(account, amount);
     }
 
     function _burn(address account, uint256 amount)
         internal
         override(ERC20, NativeERC20Base)
     {
-        super._burn(account, amount);
+        ERC20._burn(account, amount);
     }
 
     // for testing
