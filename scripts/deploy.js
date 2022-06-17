@@ -10,10 +10,12 @@ async function deploy(symbol, decimals) {
 
     const ERC20Factory = await ethers.getContractFactory("ModuleERC20");
     const erc20 = await ERC20Factory.deploy();
+    await erc20.deployed();
     console.log("implementation address: " + erc20.address)
 
     const ProxyFactory = await ethers.getContractFactory("ModuleERC20Proxy"); 
     const proxy = await ProxyFactory.deploy(erc20.address, calldata);
+    await proxy.deployed();
     console.log("proxy address: " + proxy.address)
 
     console.log("done")

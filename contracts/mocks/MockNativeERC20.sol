@@ -2,7 +2,7 @@
 pragma solidity 0.8.7;
 
 import "../ERC20.sol";
-import "./NativeERC20Base.sol";
+import "../nativeERC20/NativeERC20Base.sol";
 
 contract MockNativeERC20 is ERC20, NativeERC20Base {
     function initialize(string memory denom_, uint8 decimals_) external {
