@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.7;
 
-contract NativeERC20Base {
+contract INativeERC20 {
     address public constant moduleAddress =
         address(0xc63cf6c8E1f3DF41085E9d8Af49584dae1432b4f);
 
@@ -14,22 +14,16 @@ contract NativeERC20Base {
         string channelID
     );
 
-    function native_denom() public view returns (string memory) {
-        return symbol();
-    }
-
-    function mint_by_okc_module(address addr, uint256 amount) public {
+    function mint_by_okc_module(address addr, uint256 amount) external virtual {
         require(msg.sender == moduleAddress);
-        _mint(addr, amount);
+        // _transfer(msg.sender, addr, amount);
     }
 
-    function burn_by_okc_module(address addr, uint256 amount) public {
-        require(msg.sender == moduleAddress);
-        _burn(addr, amount);
-    }
-
-    function send_to_wasm(string memory recipient, uint256 amount) public {
-        _burn(msg.sender, amount);
+    function send_to_wasm(string memory recipient, uint256 amount)
+        external
+        virtual
+    {
+        // _transfer(msg.sender, moduleAddress, amount);
         emit __OKCSendToWasm(msg.sender, recipient, amount);
     }
 
@@ -38,8 +32,8 @@ contract NativeERC20Base {
         uint256 amount,
         string memory portID,
         string memory channelID
-    ) public {
-        _burn(msg.sender, amount);
+    ) external virtual {
+        // _transfer(msg.sender, moduleAddress, amount);
         emit __OKCSendNative20ToIbc(
             msg.sender,
             recipient,
@@ -48,10 +42,4 @@ contract NativeERC20Base {
             channelID
         );
     }
-
-    function symbol() public view virtual returns (string memory) {}
-
-    function _mint(address account, uint256 amount) internal virtual {}
-
-    function _burn(address account, uint256 amount) internal virtual {}
 }
