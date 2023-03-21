@@ -5,8 +5,8 @@ contract INativeERC20 {
     address public constant moduleAddress =
         address(0xc63cf6c8E1f3DF41085E9d8Af49584dae1432b4f);
 
-    event __OKCSendToWasm(address sender, string recipient, uint256 amount);
-    event __OKCSendNative20ToIbc(
+    event __OKBCSendToWasm(address sender, string recipient, uint256 amount);
+    event __OKBCSendNative20ToIbc(
         address sender,
         string recipient,
         uint256 amount,
@@ -14,17 +14,20 @@ contract INativeERC20 {
         string channelID
     );
 
-    function mint_by_okc_module(address addr, uint256 amount) external virtual {
+    function mint_by_okbc_module(
+        address addr,
+        uint256 amount
+    ) external virtual {
         require(msg.sender == moduleAddress);
         // _transfer(msg.sender, addr, amount);
     }
 
-    function send_to_wasm(string memory recipient, uint256 amount)
-        external
-        virtual
-    {
+    function send_to_wasm(
+        string memory recipient,
+        uint256 amount
+    ) external virtual {
         // _transfer(msg.sender, moduleAddress, amount);
-        emit __OKCSendToWasm(msg.sender, recipient, amount);
+        emit __OKBCSendToWasm(msg.sender, recipient, amount);
     }
 
     function send_native20_to_ibc(
@@ -34,7 +37,7 @@ contract INativeERC20 {
         string memory channelID
     ) external virtual {
         // _transfer(msg.sender, moduleAddress, amount);
-        emit __OKCSendNative20ToIbc(
+        emit __OKBCSendNative20ToIbc(
             msg.sender,
             recipient,
             amount,

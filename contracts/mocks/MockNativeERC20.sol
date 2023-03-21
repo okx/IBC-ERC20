@@ -9,17 +9,17 @@ contract MockNativeERC20 is INativeERC20, ERC20 {
         __ERC20_init(denom_, denom_, decimals_);
     }
 
-    function mint_by_okc_module(address addr, uint256 amount) public override {
+    function mint_by_okbc_module(address addr, uint256 amount) public override {
         require(msg.sender == moduleAddress);
         _transfer(msg.sender, addr, amount);
     }
 
-    function send_to_wasm(string memory recipient, uint256 amount)
-        public
-        override
-    {
+    function send_to_wasm(
+        string memory recipient,
+        uint256 amount
+    ) public override {
         _transfer(msg.sender, moduleAddress, amount);
-        emit __OKCSendToWasm(msg.sender, recipient, amount);
+        emit __OKBCSendToWasm(msg.sender, recipient, amount);
     }
 
     function send_native20_to_ibc(
@@ -29,7 +29,7 @@ contract MockNativeERC20 is INativeERC20, ERC20 {
         string memory channelID
     ) public override {
         _transfer(msg.sender, moduleAddress, amount);
-        emit __OKCSendNative20ToIbc(
+        emit __OKBCSendNative20ToIbc(
             msg.sender,
             recipient,
             amount,
